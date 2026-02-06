@@ -28,8 +28,10 @@ function calculatePercentage(a, b) {
 }
 
 
-let total = "";
-// let 
+let currentTotal = "";
+let operand1 = "";
+let operand2 = "";
+let operator = "";
 
 const miniDisplay = document.querySelector(".mini-display");
 const maxDisplay = document.querySelector(".max-display");
