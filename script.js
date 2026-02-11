@@ -48,6 +48,49 @@ const userInput = document.querySelectorAll('.btn');
 userInput.forEach((button) => {
     button.addEventListener("click", () => {
         const value = button.textContent;
+        
+        if(value === "AC"){
+            handleReset();
+        }
+
+        if(value === "C"){
+            if(operand2 !== ""){
+                operand2 = operand2.slice(0, -1);
+                maxDisplay.textContent = operand2;
+            } else if (operator !== "") {
+                operator = "";
+                miniDisplay.textContent = operand1;
+            }
+            else{
+                operand1 = operand1.slice(0, -1);
+                maxDisplay.textContent = operand1;
+            }
+        }
+
+        if(value === "."){
+            if(operator === "") {
+                if(!operand1.includes(".")){
+                    if(operand1 === ""){
+                        operand1 = "0.";
+                    }else{
+                        operand1 += ".";
+                    }
+                }
+                maxDisplay.textContent = operand1;
+            }
+            else{
+                if(!operand2.includes(".")){
+                    if(operand2 === ""){
+                        operand2 = "0.";
+                    }else{
+                        operand2 += ".";
+                    }
+                    
+                }
+                maxDisplay.textContent = operand2;
+            }
+        }
+
         if(!isNaN(Number(value))){
             if(operator === ""){
                 operand1 += value;
@@ -60,7 +103,9 @@ userInput.forEach((button) => {
         } 
 
         if(value === "+" || value === "-" || value === "×" || value === "÷" || value === "%"){
-            operator = value;
+            if(operator === ""){
+                operator = value;
+            }
             miniDisplay.textContent = `${operand1} ${operator}`;
         }
 
@@ -68,6 +113,8 @@ userInput.forEach((button) => {
         console.log("operand2:", operand2);
         console.log("operator:", operator);
         console.log("pressed:", value);
+
+        
 
         if(value === "="){
             let num1 = Number(operand1);
@@ -93,7 +140,7 @@ userInput.forEach((button) => {
                 default:
 
             }
-            currentTotal = result;
+            currentTotal = parseFloat(result.toFixed(10));
             miniDisplay.textContent = `${operand1} ${operator} ${operand2} = `;
             maxDisplay.textContent = result;
             console.log(result);
@@ -101,25 +148,6 @@ userInput.forEach((button) => {
             operand2 = "";
             operator = "";
         }
-
-        if(value === "C"){
-            if(operand2 !== ""){
-                operand2 = operand2.slice(0, -1);
-                maxDisplay.textContent = operand2;
-            } else if (operator !== "") {
-                operator = "";
-                miniDisplay.textContent = operand1;
-            }
-            else{
-                operand1 = operand1.slice(0, -1);
-                maxDisplay.textContent = operand1;
-            }
-        }
-
-        if(value === "AC"){
-            handleReset();
-        }
-        console.log(button.textContent);
     })
 } )
 
