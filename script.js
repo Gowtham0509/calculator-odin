@@ -103,10 +103,10 @@ userInput.forEach((button) => {
         } 
 
         if(value === "+" || value === "-" || value === "×" || value === "÷" || value === "%"){
-            if(operator === ""){
+            if(operand1 !== "" && operator === ""){
                 operator = value;
+                miniDisplay.textContent = `${operand1} ${operator}`;
             }
-            miniDisplay.textContent = `${operand1} ${operator}`;
         }
 
         console.log("operand1:", operand1);
